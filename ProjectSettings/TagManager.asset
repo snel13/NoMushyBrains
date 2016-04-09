@@ -47,6 +47,9 @@ TagManager:
   - name: Midground
     uniqueID: 3987603777
     locked: 0
+  - name: floor
+    uniqueID: 576402565
+    locked: 0
   - name: Character
     uniqueID: 3511170459
     locked: 0
