@@ -1,40 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent (typeof (BoxCollider2D))]
-public class Controller2D : MonoBehaviour {
-    // create a mask that rays will interact with
-    public LayerMask collisionMask;
 
-    // skin width is the padding around the game object where the rays emit from
-    // padding is inset so object can rest on platform 
-    const float skinWidth= .015f;
-    // number of rays emitting from player
-    public int horizontalRayCount = 4;
-    public int verticalRayCount = 4;
-	
+public class Controller2D : RaycastController {
 	float maxClimbAngle = 80;
+    float maxDescendAngle = 75;
 	
     public CollisionInfo collisions; //public reference to our collision info
-	
-    float horizontalRaySpacing;
-    float verticalRaySpacing;
-    // class BoxCollider2D is a collider for 2D physics representing an axis-aligned rectangle
-    BoxCollider2D collider;
-    // custom struct that holds the origin values for the player rayCast
-    RaycastOrigins raycastOrigins;
     
-	
-    // Monobehaviour Start is called on the frame when a script is enabled, before any update methods are called
-    void Start() {
-        collider = GetComponent<BoxCollider2D>();
-        CalculateRaySpacing();
+    public override void Start(){
+        base.Start();    
     }
-     
+
     // use Move function to keep track of the ray casts
-    public void Move(Vector3 velocity){
+    public void Move(Vector3 velocity, bool standingOnPlatform = false){
         UpdateRaycastOrigins();
 		collisions.Reset(); //blank slate each time
+        collisions.velocityOld = velocity;
+        
+        if(velocity.y < 0){
+            DescendSlope(ref velocity);
+        }
         if (velocity.x != 0){
             HorizontalCollisions(ref velocity);
         }
@@ -42,6 +28,10 @@ public class Controller2D : MonoBehaviour {
             VerticalCollisions(ref velocity);
         }
         transform.Translate(velocity);
+        
+        if(standingOnPlatform){
+            collisions.below = true;
+        }
 
     }
 
@@ -58,9 +48,18 @@ public class Controller2D : MonoBehaviour {
             // used for debugging, draws the rays in red
             Debug.DrawRay(rayOrigin, Vector2.right * directionX * rayLength, Color.red);
             if (hit){
+                
+                if(hit.distance == 0){
+                    continue;
+                }
+                
 				//angled movement
 				float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
 				if(i == 0 && slopeAngle <= maxClimbAngle){
+                    if(collisions.descendingSlope){
+                        collisions.descendingSlope = false;
+                        velocity = collisions.velocityOld;
+                    }
 					float distanceToSlopeStart = 0;
 					//starting to climb a new slope 
 					if(slopeAngle != collisions.slopeAngleOld){
@@ -109,6 +108,21 @@ public class Controller2D : MonoBehaviour {
 				collisions.above = directionY == 1;
             }
         }
+        if(collisions.climbingSlope)
+        {
+            float directionX = Mathf.Sign(velocity.x);
+            rayLength = Mathf.Abs(velocity.x) + skinWidth;
+            Vector2 rayOrigin = ((directionX == -1)?raycastOrigins.bottomLeft:raycastOrigins.bottomRight) + Vector2.up * velocity.y;
+            RaycastHit2D hit = Physics2D.Raycast(rayOrigin, Vector2.right * directionX, rayLength, collisionMask);
+            
+            if(hit){
+                float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
+                if(slopeAngle != collisions.slopeAngle){
+                    velocity.x = (hit.distance - skinWidth) * directionX;
+                    collisions.slopeAngle = slopeAngle;
+                }
+            }
+        }
     }
 
 	void ClimbSlope(ref Vector3 velocity, float slopeAngle){
@@ -123,53 +137,45 @@ public class Controller2D : MonoBehaviour {
 			collisions.slopeAngle = slopeAngle;
 		}
 	}
-	
-    // UpdateRaycastOrigins function is used in Move() function to detect space around player
-    void UpdateRaycastOrigins() {
-        // Bounds struct represents an axis aligned bounding box, this box "overlays" the player
-        // Expandincreases the size by a given amount along  each side
-        Bounds bounds = collider.bounds;
-        bounds.Expand(skinWidth * -2);
-        // set the raycastOrigins struct's to the bounds values
-        raycastOrigins.bottomLeft = new Vector2(bounds.min.x,bounds.min.y);
-        raycastOrigins.bottomRight = new Vector2(bounds.max.x,bounds.min.y);
-        raycastOrigins.topLeft = new Vector2(bounds.min.x,bounds.max.y);
-        raycastOrigins.topRight = new Vector2(bounds.max.x,bounds.max.y);
-    }
     
-    // CalculateRaySpacing function is used in Move() function to determine ray spacing
-    void CalculateRaySpacing() {
-        // once again set up Bounds struct to represent the bounding box
-        Bounds bounds = collider.bounds;
-        bounds.Expand (skinWidth * -2);
-        // use Clamp() to clamp a value between min and max 
-        // clamp the value of horizontalRayCount/verticalRayCount between 2 and 2,147,483,647
-        horizontalRayCount = Mathf.Clamp(horizontalRayCount, 2, int.MaxValue);
-        verticalRayCount = Mathf.Clamp(verticalRayCount, 2, int.MaxValue);
-        
-        horizontalRaySpacing = bounds.size.y / (horizontalRayCount - 1);
-        verticalRaySpacing = bounds.size.x / (verticalRayCount - 1);
-        
+    void DescendSlope(ref Vector3 velocity){
+        float directionX = Mathf.Sign(velocity.x);
+        Vector2 rayOrigin = (directionX == -1)?raycastOrigins.bottomRight:raycastOrigins.bottomLeft;
+        RaycastHit2D hit = Physics2D.Raycast(rayOrigin, -Vector2.up, Mathf.Infinity, collisionMask);
+        if(hit){
+            float slopeAngle = Vector2.Angle(hit.normal, Vector2.up);
+            if(slopeAngle != 0 && slopeAngle <= maxDescendAngle){
+                if(Mathf.Sign(hit.normal.x) == directionX){
+                    if(hit.distance - skinWidth <= Mathf.Tan(slopeAngle * Mathf.Deg2Rad)*Mathf.Abs(velocity.x)){
+                        float moveDistance = Mathf.Abs(velocity.x);
+                        float descendVecolityY = Mathf.Sin(slopeAngle * Mathf.Deg2Rad) * moveDistance;
+                        velocity.x = Mathf.Cos(slopeAngle * Mathf.Deg2Rad) * moveDistance * Mathf.Sign(velocity.x);
+                        velocity.y -= descendVecolityY;
+                        
+                        collisions.slopeAngle = slopeAngle;
+                        collisions.descendingSlope = true;
+                        collisions.below = true;
+                    }
+                }
+            }
+        }
     }
-    
-    // struct used in UpdateRayCastOrigins to set the bounds to the player object
-    struct RaycastOrigins{
-        public Vector2 topLeft, topRight;
-        public Vector2 bottomLeft, bottomRight;
-    }
-	
+
 	public struct CollisionInfo{
 		public bool above, below;
 		public bool left, right;
 		
 		public bool climbingSlope;
+        public bool descendingSlope;
 		public float slopeAngle, slopeAngleOld;
+        public Vector3 velocityOld;
 		
 		//reset bools to false
 		public void Reset(){
 			above = below = false;
 			left = right = false;
 			climbingSlope = false;
+            descendingSlope = false;
 			slopeAngleOld = slopeAngle;
 			slopeAngle = 0;
 		}
