@@ -9,7 +9,8 @@ public class Controller2D : RaycastController {
     public CollisionInfo collisions; //public reference to our collision info
     
     public override void Start(){
-        base.Start();    
+        base.Start();
+        collisions.faceDir = 1;
     }
 
     // use Move function to keep track of the ray casts
@@ -17,13 +18,17 @@ public class Controller2D : RaycastController {
         UpdateRaycastOrigins();
 		collisions.Reset(); //blank slate each time
         collisions.velocityOld = velocity;
-        
-        if(velocity.y < 0){
+
+        if (velocity.x != 0){
+            collisions.faceDir = (int)Mathf.Sign(velocity.x);
+        }
+
+        if (velocity.y < 0){
             DescendSlope(ref velocity);
         }
-        if (velocity.x != 0){
+       
             HorizontalCollisions(ref velocity);
-        }
+        
         if (velocity.y != 0){
             VerticalCollisions(ref velocity);
         }
@@ -37,9 +42,13 @@ public class Controller2D : RaycastController {
 
     // HorizontalCollisions function uses the RaycastHit2D struct to detect objects in the raycast area (right to left)
     void HorizontalCollisions(ref Vector3 velocity) {
-        float directionX = Mathf.Sign(velocity.x);
+        float directionX = collisions.faceDir;
         // make sure length is a positive number
         float rayLength = Mathf.Abs(velocity.x) + skinWidth;
+            
+        if (Mathf.Abs(velocity.x) < skinWidth){
+            rayLength = 2 * skinWidth;
+        }
         for (int i = 0; i < horizontalRayCount; i++){
             // see what direction we are moving in
             Vector2 rayOrigin = (directionX == -1) ? raycastOrigins.bottomLeft : raycastOrigins.bottomRight;
@@ -169,6 +178,8 @@ public class Controller2D : RaycastController {
         public bool descendingSlope;
 		public float slopeAngle, slopeAngleOld;
         public Vector3 velocityOld;
+        // 1 means faing left, -1 means facing right
+        public int faceDir;
 		
 		//reset bools to false
 		public void Reset(){
