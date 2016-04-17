@@ -8,7 +8,7 @@ public class PlatformController : RaycastController {
     public Vector3 move;
     
     public Vector3[] localWaypoints;
-    Vector3[] gl
+    
     
     
     List<PassengerMovement> passengerMovement;
