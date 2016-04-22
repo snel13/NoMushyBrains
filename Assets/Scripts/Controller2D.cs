@@ -7,17 +7,25 @@ public class Controller2D : RaycastController {
     float maxDescendAngle = 75;
 	
     public CollisionInfo collisions; //public reference to our collision info
+    [HideInInspector]
+    public Vector2 playerInput; //store our player input
+    
     
     public override void Start(){
         base.Start();
         collisions.faceDir = 1;
     }
+    
+    public void Move(Vector3 velocity, bool standingOnPlatform){
+        Move(velocity, Vector2.zero, standingOnPlatform);
+    }
 
     // use Move function to keep track of the ray casts
-    public void Move(Vector3 velocity, bool standingOnPlatform = false){
+    public void Move(Vector3 velocity, Vector2 input, bool standingOnPlatform = false){
         UpdateRaycastOrigins();
 		collisions.Reset(); //blank slate each time
         collisions.velocityOld = velocity;
+        playerInput = input;
 
         if (velocity.x != 0){
             collisions.faceDir = (int)Mathf.Sign(velocity.x);
@@ -107,6 +115,37 @@ public class Controller2D : RaycastController {
             // used for debugging, draws the rays in red
             Debug.DrawRay(rayOrigin, Vector2.up * directionY * rayLength, Color.red);
             if (hit){ 
+                //test through tag's...if collided with through tag objects let it pass through
+                if(hit.collider.tag == "Through"){
+                    //working code - temp comment
+                    if(directionY == 1 || hit.distance == 0){
+                        continue;
+                    }
+                    /*****************************************************************************
+                    *                                                                            *
+                    *      --This comment applies to 11 lines below,void resetPlatform()         *
+                    *      --And Player.cs if (cntrlr.colsions.abv || cntrlr.colsions.blw){      *
+                    *                                                                            *
+                    *  Falling through works appropriately for narrow (short width)              *   
+                    *  platforms but once the length of the platform exceeds a certain           *
+                    *  width (that is currently unknown), the player falls through mistakenly    *
+                    *  code below does work but needs an unknown amount of modifications either  * 
+                    *  here or in player class                                                   *
+                    *                                                                            *
+                    *****************************************************************************/
+                    if(collisions.fallingThroughPlatform){
+                        continue;
+                    }
+                    //working code temp comment
+                    if(playerInput.y == -1){
+                        collisions.fallingThroughPlatform = true;
+                        //calls reset function for falling through platform after half a second.
+                        //invoke is a unity only function.
+                        Invoke("ResetFallingThroughPlatform", .5f);
+                        continue;
+                    }
+                }
+                
                 velocity.y = (hit.distance - skinWidth) * directionY;
                 rayLength = hit.distance;
 				
@@ -169,7 +208,12 @@ public class Controller2D : RaycastController {
             }
         }
     }
-
+    
+    //method to reset boolean for tracking whether or not we are falling through platform, timing occurs on line 129ish
+    void ResetFallingThroughPlatform(){
+        collisions.fallingThroughPlatform = false;
+    }
+    
 	public struct CollisionInfo{
 		public bool above, below;
 		public bool left, right;
@@ -180,6 +224,8 @@ public class Controller2D : RaycastController {
         public Vector3 velocityOld;
         // 1 means faing left, -1 means facing right
         public int faceDir;
+        //keeping track of if we fall through platform or not...used for timing.
+        public bool fallingThroughPlatform;
 		
 		//reset bools to false
 		public void Reset(){

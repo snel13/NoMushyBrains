@@ -21,10 +21,15 @@ public class RaycastController : MonoBehaviour {
     // custom struct that holds the origin values for the player rayCast
     public RaycastOrigins raycastOrigins;
     
-    // Monobehaviour Start is called on the frame when a script is enabled, before any update methods are called
-    public virtual void Start() {
+    // Monobehaviour Awake is called on the frame when a script is enabled, before any update methods are called
+    //was void Start() but with the addition of CameraFollow.cs this function changed to Awake()
+    public virtual void Awake() {
         collider = GetComponent<BoxCollider2D>();
         CalculateRaySpacing();
+    }
+    
+    public virtual void Start(){
+        CalculateRaySpacing();        
     }
 
     // UpdateRaycastOrigins function is used in Move() function to detect space around player
