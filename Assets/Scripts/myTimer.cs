@@ -6,10 +6,9 @@ public class myTimer : MonoBehaviour {
 	
 	public float myCoolTimer = 99;
 	private Text timerText;
-
-	float minutes;
-	float seconds;
+	
 	string format;
+	float minutes, seconds;
 
 	// Use this for initialization
 	void Start () {
@@ -17,11 +16,18 @@ public class myTimer : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () { //https://msdn.microsoft.com/en-us/library/txafckwd.aspx
 		myCoolTimer -= Time.deltaTime; //+= to count up
-		minutes = Mathf.FloorToInt(myCoolTimer/60);
-		seconds = myCoolTimer - minutes*60;
-		format = string.Format("{0:0}:{1:00}", minutes, seconds); //H:M:SSSS
-		timerText.text = "Timer: " + format;
+		//see if the game is over
+		if(myCoolTimer == 0){
+			print("GAME OVER\n");
+			timerText.text = "Timer: 0:00";
+			//SceneManager.LoadScene("Name of End Game Scene");
+		} else {
+			minutes = Mathf.FloorToInt(myCoolTimer/60);
+			seconds = myCoolTimer - minutes*60; 
+			format = string.Format("{0:0}:{1:00}", minutes, seconds); //H:M:SSSS
+			timerText.text = "Timer: " + format;			
+		}
 	}
 }
