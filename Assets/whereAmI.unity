@@ -1461,7 +1461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.875, g: 0.24448532, b: 0.24448532, a: 1}
+  m_Color: {r: 1, g: 0.12716264, b: 0.12716264, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1470,7 +1470,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 16
+    m_FontSize: 22
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 1
@@ -1501,7 +1501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6acd590bb62e2834eb690ad1ffd4a402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myCoolTimer: 20
+  myCoolTimer: 70
 --- !u!1 &1871127390
 GameObject:
   m_ObjectHideFlags: 0
