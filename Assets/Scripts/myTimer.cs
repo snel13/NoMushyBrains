@@ -22,6 +22,7 @@ public class myTimer : MonoBehaviour {
 		if(myCoolTimer == 0){
 			print("GAME OVER\n");
 			timerText.text = "Timer: 0:00";
+            Application.Quit();
 			//SceneManager.LoadScene("Name of End Game Scene");
 		} else {
 			minutes = Mathf.FloorToInt(myCoolTimer/60);
