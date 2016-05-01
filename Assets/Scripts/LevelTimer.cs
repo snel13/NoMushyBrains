@@ -22,7 +22,9 @@ public class LevelTimer : MonoBehaviour {
 		if(levelOneTimer <= 0){
 			print("GAME OVER\n");
 			timerText.text = "Timer: 0:00";
+            // new WaitForSeconds(10f);
             Application.Quit();
+            // Invoke("Application.Quit", .5f);
 			//SceneManager.LoadScene("Name of End Game Scene");
 		}
         else if(Input.GetKeyDown("p")){
