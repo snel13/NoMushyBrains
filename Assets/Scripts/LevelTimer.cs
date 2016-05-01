@@ -2,9 +2,9 @@
 using System.Collections;
 using UnityEngine.UI; //public Text timerText
 
-public class myTimer : MonoBehaviour {
+public class LevelTimer : MonoBehaviour {
 	
-	public float myCoolTimer = 99;
+	public float levelOneTimer = 99;
 	private Text timerText;
 	
 	string format;
@@ -17,9 +17,9 @@ public class myTimer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () { //https://msdn.microsoft.com/en-us/library/txafckwd.aspx
-		myCoolTimer -= Time.deltaTime; //+= to count up
+		levelOneTimer -= Time.deltaTime; //+= to count up
 		//see if the game is over
-		if(myCoolTimer <= 0){
+		if(levelOneTimer <= 0){
 			print("GAME OVER\n");
 			timerText.text = "Timer: 0:00";
             Application.Quit();
@@ -37,8 +37,8 @@ public class myTimer : MonoBehaviour {
         }
 
         else {
-			minutes = Mathf.FloorToInt(myCoolTimer/60);
-			seconds = myCoolTimer - minutes*60; 
+			minutes = Mathf.FloorToInt(levelOneTimer/60);
+			seconds = levelOneTimer - minutes*60; 
 			format = string.Format("{0:0}:{1:00}", minutes, seconds); //H:M:SSSS
 			timerText.text = "Timer: " + format;			
 		}

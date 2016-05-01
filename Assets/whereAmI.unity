@@ -1498,10 +1498,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1787522855}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6acd590bb62e2834eb690ad1ffd4a402, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b2b7e48c785b9d42a10ffd42ec9401b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myCoolTimer: 70
+  levelOneTimer: 5
 --- !u!1 &1871127390
 GameObject:
   m_ObjectHideFlags: 0
