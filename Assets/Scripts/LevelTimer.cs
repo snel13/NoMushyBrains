@@ -23,6 +23,7 @@ public class LevelTimer : MonoBehaviour {
 			print("GAME OVER\n");
 			timerText.text = "Timer: 0:00";
             // new WaitForSeconds(10f);
+            //new comment trying to push
             Application.Quit();
             // Invoke("Application.Quit", .5f);
 			//SceneManager.LoadScene("Name of End Game Scene");
