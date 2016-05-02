@@ -9,7 +9,9 @@ public class CameraFollow : MonoBehaviour {
     public float lookSmoothTimeX;
     public float verticalSmoothTime;
     public Vector2 focusAreaSize;
-
+    //for camera follow networking??? http://stackoverflow.com/questions/34043689/need-help-getting-camera-to-follow-instantiated-gameobject-player
+    //public GameObject playerPrefab;
+    
     //create a camera variable
     FocusArea focusArea;
     
@@ -24,6 +26,8 @@ public class CameraFollow : MonoBehaviour {
     //setup bounds of camera follow (focusArea)
     //player is always the focal point of the camera
     void Start(){
+        //added for network ability ...not working yet
+        //Network.Instantiate(playerPrefab, Vector3.up*5, Quaternion.identity,0);
         focusArea = new FocusArea(target.collider.bounds, focusAreaSize);
     }
     

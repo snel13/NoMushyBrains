@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+//for networking
+using UnityEngine.Networking;
+
 
 [RequireComponent (typeof (Controller2D))]
-public class Player : MonoBehaviour {
+//was monobehaviour
+public class Player : NetworkBehaviour {
     
 	//affect gravity and jump velocity
 	public float maxJumpHeight = 4;
@@ -40,6 +44,13 @@ public class Player : MonoBehaviour {
     }
 
     void Update() {
+        //for network
+        if(!isLocalPlayer)
+        {
+            return;
+        }
+
+        
         // use struct to represent 2D positions and vectors
         // Input is the class to read the axes from the keyboard, multi-touch (mobile) or mouse
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
