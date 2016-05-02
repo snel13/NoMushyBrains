@@ -1,15 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-//for network ability
-using UnityEngine.Networking;
 
-//added for network ability
-[RequireComponent (typeof (NetworkBehaviour))]
-//was monobehaviour
 public class PlatformController : RaycastController {
    
     public LayerMask passengerMask;
+    
     
     public Vector3[] localWaypoints;
     Vector3[] globalWaypoints;
@@ -79,7 +75,7 @@ public class PlatformController : RaycastController {
         percentBetweenWaypoints = Mathf.Clamp01(percentBetweenWaypoints);
         float easedPercentBetweenWaypoints = Ease(percentBetweenWaypoints);
        
-        // Lerp method is used to find a point between two end points (return the percent between waypoints
+        // Lerp method is used to find a point between two end points (return the percent btwe waypoints
         Vector3 newPos = Vector3.Lerp(globalWaypoints[fromWaypointIndex], globalWaypoints[toWaypointIndex], easedPercentBetweenWaypoints);
 
         if(percentBetweenWaypoints >= 1) {
