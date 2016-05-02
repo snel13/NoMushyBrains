@@ -22,10 +22,12 @@ public class LevelTimer : MonoBehaviour {
 		if(levelOneTimer <= 0){
 			print("GAME OVER\n");
 			timerText.text = "Timer: 0:00";
+<<<<<<< HEAD
             // new WaitForSeconds(10f);
             //new comment trying to push
+=======
+>>>>>>> parent of c758e1c... Time and again?
             Application.Quit();
-            // Invoke("Application.Quit", .5f);
 			//SceneManager.LoadScene("Name of End Game Scene");
 		}
         else if(Input.GetKeyDown("p")){
