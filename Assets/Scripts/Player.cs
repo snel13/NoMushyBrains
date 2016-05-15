@@ -43,6 +43,10 @@ public class Player : NetworkBehaviour {
 
 
     void Update() {
+		if(!isLocalPlayer){
+			return;
+		}
+		Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, Camera.main.transform.position.z);
         // use struct to represent 2D positions and vectors
         // Input is the class to read the axes from the keyboard, multi-touch (mobile) or mouse
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
