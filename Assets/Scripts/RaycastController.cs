@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
 [RequireComponent (typeof (BoxCollider2D))]
-public class RaycastController : MonoBehaviour {
+public class RaycastController : NetworkBehaviour {
     // create a mask that rays will interact with
     public LayerMask collisionMask;
 
@@ -19,7 +20,7 @@ public class RaycastController : MonoBehaviour {
     // class BoxCollider2D is a collider for 2D physics representing an axis-aligned rectangle
     public BoxCollider2D collider;
     // custom struct that holds the origin values for the player rayCast
-    public RaycastOrigins raycastOrigins;
+    [SyncVar] public RaycastOrigins raycastOrigins;
     
     // Monobehaviour Awake is called on the frame when a script is enabled, before any update methods are called
     //was void Start() but with the addition of CameraFollow.cs this function changed to Awake()

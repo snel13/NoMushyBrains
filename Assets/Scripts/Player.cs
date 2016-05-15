@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
 [RequireComponent (typeof (Controller2D))]
-public class Player : MonoBehaviour {
+public class Player : NetworkBehaviour {
     
 	//affect gravity and jump velocity
 	public float maxJumpHeight = 4;
