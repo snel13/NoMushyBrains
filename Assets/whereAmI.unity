@@ -171,56 +171,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 252074116}
---- !u!1001 &415359456
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 487690, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0.000000035166
-      objectReference: {fileID: 0}
-    - target: {fileID: 487690, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 3.93
-      objectReference: {fileID: 0}
-    - target: {fileID: 487690, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 487690, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 487690, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 487690, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0.031772494
-      objectReference: {fileID: 0}
-    - target: {fileID: 487690, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.9994952
-      objectReference: {fileID: 0}
-    - target: {fileID: 487690, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 111926, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-      propertyPath: m_Name
-      value: Ground (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 487690, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 4.4799232
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1001 &608449336
 Prefab:
   m_ObjectHideFlags: 0
@@ -599,6 +549,7 @@ MonoBehaviour:
   m_OfflineScene: whereAmI
   m_OnlineScene: whereAmI
   m_SpawnPrefabs:
+  - {fileID: 132598, guid: e6c4bc41e0f09b1408b84f6a9c8ec77e, type: 2}
   - {fileID: 0}
   m_CustomConfig: 0
   m_MaxConnections: 4

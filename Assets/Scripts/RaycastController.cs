@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 
 [RequireComponent (typeof (BoxCollider2D))]
-public class RaycastController : MonoBehaviour{
+public class RaycastController : NetworkBehaviour{
     // create a mask that rays will interact with
     public LayerMask collisionMask;
 
@@ -10,6 +11,7 @@ public class RaycastController : MonoBehaviour{
     // padding is inset so object can rest on platform 
     public const float skinWidth= .015f;
     // number of rays emitting from player
+    
     public int horizontalRayCount = 4;
     public int verticalRayCount = 4;
     

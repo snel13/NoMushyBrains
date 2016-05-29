@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 using UnityEngine.UI; //public Text timerText
 
-public class LevelTimer : MonoBehaviour {
-	
-	public float levelOneTimer = 99;
-	private Text timerText;
+public class LevelTimer : NetworkBehaviour {
+
+    [SyncVar]
+    public float levelOneTimer = 99;
+
+    private Text timerText;
 	
 	string format;
 	float minutes, seconds;
@@ -16,13 +19,16 @@ public class LevelTimer : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () { //https://msdn.microsoft.com/en-us/library/txafckwd.aspx
-		levelOneTimer -= Time.deltaTime; //+= to count up
+	void Update () { //https://msdn.microsoft.com/en-us/library/txafckwd.aspx1
+        levelOneTimer -= Time.deltaTime; //+= to count up
 		//see if the game is over
 		if(levelOneTimer <= 0){
 			print("GAME OVER\n");
-			timerText.text = "Timer: 0:00";
-            // new WaitForSeconds(10f);
+            
+  
+            timerText.text = "Timer: 0:00";
+            
+        // new WaitForSeconds(10f);
             Application.Quit();
             // Invoke("Application.Quit", .5f);
 			//SceneManager.LoadScene("Name of End Game Scene");

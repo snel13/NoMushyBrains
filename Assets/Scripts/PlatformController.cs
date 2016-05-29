@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
 
 public class PlatformController : RaycastController {
    
     public LayerMask passengerMask;
-    
-    
+     
     public Vector3[] localWaypoints;
     Vector3[] globalWaypoints;
     
+
     public float speed;
     // create bool to state if we want a cyclic platform behaviour
     public bool cyclic;
@@ -40,6 +41,10 @@ public class PlatformController : RaycastController {
 	
 	// Update is called once per frame
 	void Update () {
+
+        Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, Camera.main.transform.position.z);
+
+
         UpdateRaycastOrigins();
         
 	    Vector3 velocity = CalculatePlatformMovement();
@@ -182,7 +187,7 @@ public class PlatformController : RaycastController {
     }
 
 
-
+    
     struct PassengerMovement{
         public Transform transform;
         public Vector3 velocity;
