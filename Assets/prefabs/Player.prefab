@@ -33,7 +33,7 @@ GameObject:
   - 65: {fileID: 6522382}
   - 23: {fileID: 2374262}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +58,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137184}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 186.70952, y: 2.8323593, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_Children:
   - {fileID: 445574}
@@ -96,7 +96,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 172994}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!61 &6132930
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -217,12 +217,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e99cd9a1bce5a8c40a3d2965ad4c57ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxJumpHeight: 6
+  maxJumpHeight: 7
   minJumpHeight: 1
   timeToJumpApex: 0.4
   wallJumpClimb: {x: 20, y: 20}
-  wallJumpOff: {x: 20, y: 20}
-  wallLeap: {x: 20, y: 20}
+  wallJumpOff: {x: 30, y: 30}
+  wallLeap: {x: 30, y: 30}
   wallSlideSpeedMax: 3
   wallStickTime: 1
 --- !u!1001 &100100000
