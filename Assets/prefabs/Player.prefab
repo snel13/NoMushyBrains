@@ -220,9 +220,9 @@ MonoBehaviour:
   maxJumpHeight: 6
   minJumpHeight: 1
   timeToJumpApex: 0.4
-  wallJumpClimb: {x: 10, y: 10}
-  wallJumpOff: {x: 10, y: 20}
-  wallLeap: {x: 10, y: 20}
+  wallJumpClimb: {x: 20, y: 20}
+  wallJumpOff: {x: 20, y: 20}
+  wallLeap: {x: 20, y: 20}
   wallSlideSpeedMax: 3
   wallStickTime: 1
 --- !u!1001 &100100000
