@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11442278}
   - 114: {fileID: 11427012}
   - 114: {fileID: 11453416}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -32,7 +32,7 @@ GameObject:
   - 33: {fileID: 3377406}
   - 65: {fileID: 6522382}
   - 23: {fileID: 2374262}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ MonoBehaviour:
   wallJumpOff: {x: 30, y: 30}
   wallLeap: {x: 30, y: 30}
   wallSlideSpeedMax: 3
-  wallStickTime: 1
+  wallStickTime: 0.25
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
