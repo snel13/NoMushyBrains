@@ -1374,7 +1374,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b2b7e48c785b9d42a10ffd42ec9401b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelOneTimer: 99
+  levelOneTimer: 900
 --- !u!114 &252074119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10728,64 +10728,6 @@ Prefab:
     - target: {fileID: 111926, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
       propertyPath: m_Name
       value: trapWall
-      objectReference: {fileID: 0}
-    - target: {fileID: 3399564, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-  m_IsPrefabParent: 0
---- !u!1001 &1305608830
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 487690, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 112.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 487690, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 79.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 487690, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 487690, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 487690, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 487690, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0.34717417
-      objectReference: {fileID: 0}
-    - target: {fileID: 487690, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.9378007
-      objectReference: {fileID: 0}
-    - target: {fileID: 487690, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-      propertyPath: m_RootOrder
-      value: 113
-      objectReference: {fileID: 0}
-    - target: {fileID: 111926, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-      propertyPath: m_Name
-      value: DELETE
-      objectReference: {fileID: 0}
-    - target: {fileID: 487690, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-      propertyPath: m_LocalScale.y
-      value: 0.21537797
-      objectReference: {fileID: 0}
-    - target: {fileID: 487690, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
-      propertyPath: m_LocalScale.x
-      value: 8.717062
       objectReference: {fileID: 0}
     - target: {fileID: 3399564, guid: c6e830c0590ad9344baea8dad1ce8dcd, type: 2}
       propertyPath: m_Mesh
