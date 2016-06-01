@@ -24,3 +24,5 @@ ExportedObj/
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
+Assets/whereAmI1.unity
+*.meta
